@@ -9,3 +9,11 @@ install:
 script:
   - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
   - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+    # Run again to check for idempotence
+  - >
+    ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo 2>&1
+    | tee output.file
+  - >
+    grep -q 'changed=0.*failed=0' output.file
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
