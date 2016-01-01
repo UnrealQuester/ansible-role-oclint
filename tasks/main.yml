@@ -14,13 +14,13 @@
     src=/tmp/oclint.tar.gz
     dest=/tmp
     copy=no
-  when: oclint_download|success
+  when: oclint_download|success and not oclint_download|skipped
   register: oclint_unpack
 
 - name: Install oclint
   shell: mv /tmp/oclint-*/bin/* /usr/bin/ && mv /tmp/oclint-*/lib/* /usr/lib/
-  when: oclint_unpack|success
+  when: oclint_unpack|success and not oclint_unpack|skipped
 
 - name: Cleanup
   shell: rm -r /tmp/oclint*
-  when: oclint_download|success
+  when: oclint_download|success and not oclint_download|skipped
