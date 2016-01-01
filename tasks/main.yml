@@ -1,0 +1,26 @@
+- name: Check for oclint
+  stat: path=/usr/bin/oclint
+  register: oclint_stat
+
+- name: Download oclint
+  get_url: >
+    url=https://github.com/oclint/oclint/releases/download/v0.10.2/oclint-0.10.2-x86_64-linux-3.13.0-48-generic.tar.gz
+    dest=/tmp/oclint.tar.gz
+  when: oclint_stat.stat.exists == False
+  register: oclint_download
+
+- name: Unpack oclint
+  unarchive: >
+    src=/tmp/oclint.tar.gz
+    dest=/tmp
+    copy=no
+  when: oclint_download|success
+  register: oclint_unpack
+
+- name: Install oclint
+  shell: mv /tmp/oclint-*/bin/* /usr/bin/ && mv /tmp/oclint-*/lib/* /usr/lib/
+  when: oclint_unpack|success
+
+- name: Cleanup
+  shell: rm -r /tmp/oclint*
+  when: oclint_download|success
