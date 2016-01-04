@@ -18,7 +18,9 @@
   register: oclint_unpack
 
 - name: Install oclint
-  shell: mv /tmp/oclint-*/bin/* /usr/bin/ && mv /tmp/oclint-*/lib/* /usr/lib/
+  shell: >
+    mv /tmp/oclint-*/bin/* {{ oclint_install_dir }}/bin/ &&
+    mv /tmp/oclint-*/lib/* {{ oclint_install_dir }}/lib/
   when: oclint_unpack|success and not oclint_unpack|skipped
 
 - name: Cleanup

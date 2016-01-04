@@ -9,6 +9,18 @@ Debian: Jessie or newer
 
 Ubuntu: Trusty or newer
 
+# Role Variables
+
+Available variables aling with their default values:
+```
+oclint_install_dir: "/usr"
+```
+The directory where oclint will be installed. Because of the way
+oclint searches for its library files, the binaries are copied to
+`{{ oclint_install_dir }}/bin` and the libraries are copied to
+`{{ oclint_install_dir }}/lib`.
+
+
 # Install
 
 ```ansible-galaxy install UnrealQuester.oclint```
