@@ -20,6 +20,11 @@ oclint searches for its library files, the binaries are copied to
 `{{ oclint_install_dir }}/bin` and the libraries are copied to
 `{{ oclint_install_dir }}/lib`.
 
+```
+oclint_download_url: "https://github.com/oclint/oclint/releases/download/v0.10.2/oclint-0.10.2-x86_64-linux-3.13.0-48-generic.tar.gz"
+```
+Link to the oclint binary download.
+
 
 # Install
 

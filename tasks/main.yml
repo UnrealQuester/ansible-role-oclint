@@ -4,7 +4,7 @@
 
 - name: Download oclint
   get_url: >
-    url=https://github.com/oclint/oclint/releases/download/v0.10.2/oclint-0.10.2-x86_64-linux-3.13.0-48-generic.tar.gz
+    url={{ oclint_download_url }}
     dest=/tmp/oclint.tar.gz
   when: oclint_stat.stat.exists == False
   register: oclint_download
